@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow:
+
+Sitemap: https://team-apex-admin.vercel.app/sitemap.xml

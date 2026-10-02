@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="index, follow">
+  <meta name="google-site-verification" content="google5c477f08f64f15ea.html" />
+  <meta name="google-site-verification" content="google5c477f08f64f15ea" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hackathons — Apex Innovators Admin</title>
+  <meta name="description" content="Administer the Apex Innovators hackathon archive: add, edit and remove entries.">
+  
+  <meta name="theme-color" content="#0a0f1a">
+  <link rel="icon" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%2322d3ee'/%3E%3Cpath d='M13 2 3 14h9l-1 8 10-12h-9l1-8z' fill='%23050a14'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"></noscript>
+  <link rel="preload" href="css/style.css" as="style">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/human.css">
+<script src="js/fast-nav.js" defer></script>
+</head>
+<body class="admin-body">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="admin-layout">
+    <aside class="admin-sidebar" id="admin-sidebar" aria-label="Admin navigation"></aside>
+    <div class="admin-main">
+      <header class="admin-topbar" id="admin-topbar"></header>
+      <main class="admin-content" id="main-content">
+        <div class="admin-stack">
+          <div class="toolbar">
+            <div class="toolbar-left">
+              <p class="muted" style="font-size:0.9rem;">Every entry becomes a public story with linked projects and certificates.</p>
+            </div>
+            <div class="toolbar-right">
+              <button class="btn btn-primary" id="btn-new" type="button">
+                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                New hackathon
+              </button>
+            </div>
+          </div>
+
+          <p class="results-meta" id="list-info" role="status"></p>
+
+          <div class="table-wrap">
+            <div class="table-scroll">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Organizer</th>
+                    <th scope="col">Date</th>
+                    <th scope="col" class="hide-md">Result</th>
+                    <th scope="col">Projects</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+              </table>
+            </div>
+          </div>
+          <div id="table-pager"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <dialog id="hackathon-modal" class="modal" aria-labelledby="hackathon-modal-title">
+    <div class="modal-box wide">
+      <div class="modal-head">
+        <h2 id="hackathon-modal-title">Hackathon</h2>
+        <button class="modal-close" type="button" data-dialog-close aria-label="Close">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <form id="hackathon-form" class="modal-body form" novalidate>
+        <input type="hidden" id="h-id" value="">
+        <div class="form-grid">
+          <div class="field span-2">
+            <label for="h-name">Name <span class="req">*</span></label>
+            <input class="input" id="h-name" type="text" maxlength="190" placeholder="e.g. Smart India Hackathon" required>
+          </div>
+          <div class="field">
+            <label for="h-organizer">Organizer</label>
+            <input class="input" id="h-organizer" type="text" maxlength="190" placeholder="Who ran the event">
+          </div>
+          <div class="field">
+            <label for="h-date">Date</label>
+            <input class="input" id="h-date" type="date">
+          </div>
+          <div class="field span-2">
+            <label for="h-description">Story / description</label>
+            <textarea class="input" id="h-description" rows="4" maxlength="10000" placeholder="How it went — the full write-up"></textarea>
+          </div>
+          <div class="field span-2">
+            <label for="h-challenge">Challenge</label>
+            <textarea class="input" id="h-challenge" rows="3" maxlength="10000" placeholder="The problem statement we tackled"></textarea>
+          </div>
+          <div class="field span-2">
+            <label for="h-result">Result</label>
+            <input class="input" id="h-result" type="text" maxlength="300" placeholder="e.g. Winner — Best Innovation Track">
+          </div>
+          <div class="field">
+            <label for="h-cert-url">Certificate URL</label>
+            <input class="input" id="h-cert-url" type="url" placeholder="https://…">
+          </div>
+          <div class="field">
+            <label for="h-pres-url">Presentation URL</label>
+            <input class="input" id="h-pres-url" type="url" placeholder="https://…">
+          </div>
+        </div>
+        <div class="modal-foot" style="padding-inline:0;border-top:none;padding-bottom:0;">
+          <span class="spacer"></span>
+          <button class="btn btn-ghost" type="button" data-dialog-close>Cancel</button>
+          <button class="btn btn-primary" type="submit">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Save hackathon
+          </button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <script type="module" src="js/components.js"></script>
+  <script type="module" src="js/admin/admin-hackathons.js"></script>
+</body>
+</html>

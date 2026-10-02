@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="index, follow">
+  <meta name="google-site-verification" content="google5c477f08f64f15ea.html" />
+  <meta name="google-site-verification" content="google5c477f08f64f15ea" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Posts — Apex Innovators Admin</title>
+  <meta name="description" content="Moderate Apex Innovators community posts: review, approve, publish or reject.">
+  
+  <meta name="theme-color" content="#0a0f1a">
+  <link rel="icon" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%2322d3ee'/%3E%3Cpath d='M13 2 3 14h9l-1 8 10-12h-9l1-8z' fill='%23050a14'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"></noscript>
+  <link rel="preload" href="css/style.css" as="style">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/human.css">
+<script src="js/fast-nav.js" defer></script>
+</head>
+<body class="admin-body">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="admin-layout">
+    <aside class="admin-sidebar" id="admin-sidebar" aria-label="Admin navigation"></aside>
+    <div class="admin-main">
+      <header class="admin-topbar" id="admin-topbar"></header>
+      <main class="admin-content" id="main-content">
+        <div class="admin-stack">
+          <div class="toolbar">
+            <div class="toolbar-left filter-row">
+              <select class="input" id="filter-status" style="width:auto;" aria-label="Filter by status">
+                <option value="">All statuses</option>
+                <option value="DRAFT">Draft</option>
+                <option value="PENDING_REVIEW">Pending review</option>
+                <option value="APPROVED">Approved</option>
+                <option value="PUBLISHED">Published</option>
+                <option value="REJECTED">Rejected</option>
+              </select>
+              <span class="muted" style="font-size:0.86rem;">Open a post to read it in full and change its status.</span>
+            </div>
+            <div class="toolbar-right">
+              <button class="btn btn-primary btn-sm" type="button" id="btn-new-post">New post</button>
+            </div>
+          </div>
+
+          <p class="results-meta" id="list-info" role="status"></p>
+
+          <div class="table-wrap">
+            <div class="table-scroll">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Post</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Likes</th>
+                    <th scope="col">Comments</th>
+                    <th scope="col" class="hide-md">Created</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+              </table>
+            </div>
+          </div>
+          <div id="table-pager"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <dialog id="post-create-modal" class="modal" aria-labelledby="post-create-title">
+    <div class="modal-box" style="max-width:640px;">
+      <div class="modal-head">
+        <h2 id="post-create-title">New community post</h2>
+        <button class="modal-close" type="button" data-dialog-close aria-label="Close">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <form id="post-create-form" class="modal-body form" novalidate>
+        <div class="form-grid">
+          <div class="field">
+            <label for="np-type">Type</label>
+            <select class="input" id="np-type">
+              <option value="ANNOUNCEMENT">Announcement</option>
+              <option value="DISCUSSION">Discussion</option>
+              <option value="PROJECT">Project</option>
+              <option value="ACHIEVEMENT">Achievement</option>
+              <option value="HACKATHON">Hackathon</option>
+              <option value="RESOURCE">Resource</option>
+              <option value="QUESTION">Question</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="np-status">Status</label>
+            <select class="input" id="np-status">
+              <option value="PUBLISHED">Published (visible now)</option>
+              <option value="APPROVED">Approved</option>
+              <option value="DRAFT">Draft</option>
+              <option value="PENDING_REVIEW">Pending review</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="np-title">Title *</label>
+          <input class="input" id="np-title" required maxlength="190">
+        </div>
+        <div class="field">
+          <label for="np-body">Body</label>
+          <textarea class="input" id="np-body" rows="6" maxlength="20000" placeholder="Write the post content…"></textarea>
+        </div>
+        <p class="hint">Posted as you (the admin). PUBLISHED posts appear immediately in the community feed.</p>
+        <p class="form-error" id="post-create-error" role="alert" hidden></p>
+        <div class="modal-foot" style="padding-inline:0;border-top:none;padding-bottom:0;">
+          <span class="spacer"></span>
+          <button class="btn btn-ghost" type="button" data-dialog-close>Cancel</button>
+          <button class="btn btn-primary" type="submit">Publish post</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog id="post-review-modal" class="modal" aria-labelledby="post-review-title">
+    <div class="modal-box wide">
+      <div class="modal-head">
+        <h2 id="post-review-title">Review post</h2>
+        <button class="modal-close" type="button" data-dialog-close aria-label="Close">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body" id="post-review-body"></div>
+    </div>
+  </dialog>
+
+  <script type="module" src="js/components.js"></script>
+  <script type="module" src="js/admin/admin-posts.js"></script>
+</body>
+</html>

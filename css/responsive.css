@@ -1,0 +1,149 @@
+/* ============================================================
+   Apex Innovators — responsive.css
+   Breakpoints: 1024 / 768 / 480. Collapsible mobile navigation.
+   ============================================================ */
+
+/* Community two-column layout */
+.community-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 1.75rem;
+  align-items: start;
+}
+
+.community-side {
+  position: sticky;
+  top: calc(var(--header-h) + 24px);
+  display: grid;
+  gap: 1rem;
+}
+
+/* ---------- ≤1024 (tablet / collapsed nav) ---------- */
+@media (max-width: 1024px) {
+  .community-layout { grid-template-columns: 1fr; }
+  .community-side { position: static; order: 2; }
+  .nav-burger { display: inline-flex; align-items: center; justify-content: center; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: rgba(6, 11, 20, 0.98);
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem clamp(1.1rem, 3.5vw, 2rem) 1.25rem;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .nav-links.open { display: flex; max-height: calc(100vh - var(--header-h)); overflow-y: auto; animation: nav-drop 0.18s ease forwards; }
+  @keyframes nav-drop {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .nav-list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    width: 100%;
+  }
+
+  .nav-link { padding: 0.7rem 0.85rem; font-size: 1rem; }
+
+  .nav-actions {
+    border-left: none;
+    border-top: 1px solid var(--border);
+    margin-left: 0;
+    margin-top: 0.5rem;
+    padding-left: 0;
+    padding-top: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .g4 { grid-template-columns: repeat(2, 1fr); }
+  .g3 { grid-template-columns: repeat(2, 1fr); }
+
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-visual { order: -1; max-width: 620px; }
+  .hero-stats { grid-template-columns: repeat(3, 1fr); gap: 1rem 0.8rem; }
+
+  .footer-grid { grid-template-columns: 1.4fr 1fr 1fr; }
+  .footer-cta { grid-column: 1 / -1; max-width: 520px; }
+
+  .wall-grid { grid-template-columns: repeat(2, 1fr); }
+  .value-list { grid-template-columns: repeat(2, 1fr); }
+  .detail-grid { grid-template-columns: 1fr; }
+  .detail-side { position: static; }
+  .split { grid-template-columns: 1fr; }
+
+  .admin-content { padding: 1.25rem; }
+}
+
+/* ---------- ≤768 (small tablet / landscape phone) ---------- */
+@media (max-width: 768px) {
+  .section { padding-block: 2.75rem; }
+
+  .g2, .g3 { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .footer-cta { grid-column: auto; max-width: none; }
+  .footer-brand { grid-column: 1 / -1; }
+
+  .form-grid { grid-template-columns: 1fr; }
+  .form-grid .span-2 { grid-column: auto; }
+
+  .event-card { flex-direction: column; }
+  .event-date { min-width: 0; align-self: stretch; display: flex; align-items: center; justify-content: flex-start; gap: 0.6rem; padding: 0.4rem 0.9rem; }
+
+  .cta-band { flex-direction: column; align-items: flex-start; }
+
+  .table-scroll table.table { min-width: 560px; }
+  .hide-md { display: none; }
+
+  .page-hero h1 { font-size: 2rem; }
+}
+
+/* ---------- ≤480 (phone) ---------- */
+@media (max-width: 480px) {
+  .g4 { grid-template-columns: 1fr; }
+  .wall-grid { grid-template-columns: 1fr; }
+  .value-list { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: 1fr 1fr; row-gap: 1.1rem; }
+
+  .brand-name { font-size: 1.02rem; }
+  .brand-mark { width: 30px; height: 30px; }
+
+  .hero-cta .btn { flex: 1; }
+
+  .hide-sm { display: none; }
+
+  .nav-user { max-width: 130px; }
+
+  .tl-item::before { display: none; }
+  .timeline { padding-left: 0; }
+  .timeline::before { display: none; }
+
+  .toast-root, #toast-root { right: 0.9rem; bottom: 0.9rem; width: calc(100vw - 1.8rem); }
+
+  .modal-box { max-height: 92vh; }
+  .modal-body { padding: 1.1rem; }
+  .modal-foot { flex-wrap: wrap; }
+
+  .form-actions .btn { flex: 1 1 auto; }
+  .form-actions .spacer { display: none; }
+
+  .member-head { flex-direction: column; align-items: flex-start; }
+  .member-head .avatar { width: 64px; height: 64px; font-size: 1.3rem; }
+
+  .kv { grid-template-columns: 1fr; gap: 0.2rem; }
+  .kv dd { margin-bottom: 0.5rem; }
+}
+
+/* Focus stays visible when keyboard-browsing drawers */
+@media (hover: none) {
+  .card-hover:hover { transform: none; }
+}

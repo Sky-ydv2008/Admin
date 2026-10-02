@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Log in — Apex Innovators</title>
+  <meta name="description" content="Log in to your Apex Innovators account to post in the community and manage your team activity.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Log in — Apex Innovators">
+  <meta name="theme-color" content="#0a0f1a">
+  <link rel="icon" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"></noscript>
+  <link rel="preload" href="css/style.css" as="style">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/human.css">
+<script src="js/fast-nav.js" defer></script>
+</head>
+<body id="top">
+  <header id="nav-root" data-active="login"></header>
+
+  <main id="main-content">
+    <section class="section">
+      <div class="container" style="max-width:1050px;">
+        <div class="split-auth-card spotlight-card">
+          <div class="spotlight-glow"></div>
+          
+          <div class="auth-form-content" style="padding:clamp(1.75rem,4vw,3rem);">
+            <div style="text-align:center;margin-bottom:1.5rem;">
+              <span class="eyebrow center-rule" style="justify-content:center;">Welcome back</span>
+              <h1 style="font-size:1.8rem;font-weight:800;" class="text-gradient">Sign In to Platform</h1>
+              <p class="muted" style="font-size:0.9rem;margin-top:0.4rem;">Post in the community, moderate content & manage builds.</p>
+              
+              <ul class="social-icons-list">
+                <li>
+                  <a href="#" class="social-icon-btn" title="Sign in with GitHub" aria-label="Sign in with GitHub">
+                    <div class="social-bg-fill"></div>
+                    <svg class="ico social-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="social-icon-btn" title="Connect LinkedIn" aria-label="Connect LinkedIn">
+                    <div class="social-bg-fill"></div>
+                    <svg class="ico social-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="social-icon-btn" title="Join Community" aria-label="Join Community">
+                    <div class="social-bg-fill"></div>
+                    <svg class="ico social-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+                  </a>
+              </ul>
+              <span class="faint" style="font-size:0.8rem;">or use your account</span>
+            </div>
+
+            <div id="login-alert" style="margin-bottom:1.1rem;"></div>
+
+            <form id="login-form" class="form" novalidate>
+              <div class="field">
+                <label for="email">Email</label>
+                <div class="input-glow-wrapper">
+                  <input class="input" id="email" name="email" type="email" maxlength="190" placeholder="you@example.com" required autocomplete="email" autofocus>
+                </div>
+              </div>
+              <div class="field">
+                <label for="password">Password</label>
+                <div class="input-glow-wrapper">
+                  <input class="input" id="password" name="password" type="password" maxlength="128" placeholder="Your password" required autocomplete="current-password">
+                </div>
+              </div>
+              <div class="form-actions" style="margin-top:1.2rem;">
+                <button class="btn btn-primary btn-lg btn-block btn-shimmer" type="submit">
+                  <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                  <span>Sign In</span>
+                </button>
+              </div>
+            </form>
+
+            <p class="center muted" style="font-size:0.9rem;margin-top:1.4rem;">
+              New to the platform? <a href="register.html" style="color:#22d3ee;font-weight:600;">Create an account</a>
+            </p>
+          </div>
+
+          <div class="auth-visual-cover hidden lg:block">
+            <img src="https://cdn.21st.dev/assets/mirror/c7/c7c7aee18ed1be4c0450d411b3339874a04999ad26948273c9d6fe96a66a21ea.jpg" alt="Developer Workspace" loading="lazy">
+            <div class="auth-visual-overlay">
+              <span class="eyebrow" style="color:#7dd3fc;">Apex Innovators</span>
+              <h2 style="font-size:1.6rem;color:#fff;font-weight:700;margin-top:0.4rem;">Student Developer Squad</h2>
+              <p class="faint" style="font-size:0.88rem;color:#94a3b8;margin-top:0.4rem;">Access admin dashboards, community discussions, project moderation, and live builds.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer-root"></footer>
+
+  <script type="module" src="js/components.js"></script>
+  <script type="module" src="js/login.js"></script>
+</body>
+</html>

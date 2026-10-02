@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Developer Resources — Apex Innovators Admin</title>
+  <meta name="description" content="Administer Apex Innovators developer resources, guides, and tooling.">
+  <meta name="theme-color" content="#0a0f1a">
+  <link rel="icon" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/human.css">
+  <script src="js/fast-nav.js" defer></script>
+</head>
+<body class="admin-body">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="admin-layout">
+    <aside class="admin-sidebar" id="admin-sidebar" aria-label="Admin navigation"></aside>
+    <div class="admin-main">
+      <header class="admin-topbar" id="admin-topbar"></header>
+      <main class="admin-content" id="main-content">
+        <div class="admin-stack">
+          <div class="toolbar">
+            <div class="toolbar-left filter-row">
+              <input class="input" id="filter-q" type="search" placeholder="Search resources..." style="max-width:260px;">
+              <select class="input" id="filter-category" style="width:auto;">
+                <option value="">All categories</option>
+                <option value="GUIDE">Guides & Tutorials</option>
+                <option value="TOOL">Tools & Utilities</option>
+                <option value="DOCUMENTATION">Documentation</option>
+                <option value="TEMPLATE">Templates</option>
+              </select>
+            </div>
+            <div class="toolbar-right">
+              <button class="btn btn-primary" type="button" id="btn-new">
+                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                New Resource
+              </button>
+            </div>
+          </div>
+
+          <p class="results-meta" id="list-info" role="status"></p>
+
+          <div class="table-wrap">
+            <div class="table-scroll">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Resource Title</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Description</th>
+                    <th scope="col" class="hide-md">Resource Link</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+              </table>
+            </div>
+          </div>
+          <div id="table-pager"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <dialog id="resource-modal" class="modal" aria-labelledby="resource-modal-title">
+    <div class="modal-box wide">
+      <div class="modal-head">
+        <h2 id="resource-modal-title">New Resource</h2>
+        <button class="modal-close" type="button" data-dialog-close aria-label="Close">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <form id="resource-form" class="modal-body form" novalidate>
+        <input type="hidden" id="res-id" value="">
+        <div class="form-grid">
+          <div class="field span-2">
+            <label for="res-title">Title <span class="req">*</span></label>
+            <input class="input" id="res-title" type="text" placeholder="e.g. Spring Boot JWT Auth Boilerplate" required>
+          </div>
+          <div class="field">
+            <label for="res-category">Category</label>
+            <select class="input" id="res-category">
+              <option value="GUIDE">Guide & Tutorial</option>
+              <option value="TOOL">Tool & Utility</option>
+              <option value="DOCUMENTATION">Documentation</option>
+              <option value="TEMPLATE">Template</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="res-url">Resource Link <span class="req">*</span></label>
+            <input class="input" id="res-url" type="url" placeholder="https://…" required>
+          </div>
+          <div class="field span-2">
+            <label for="res-description">Description</label>
+            <textarea class="input" id="res-description" rows="4" placeholder="Brief summary of the resource…"></textarea>
+          </div>
+        </div>
+        <div class="modal-foot" style="padding-inline:0;border-top:none;padding-bottom:0;">
+          <span class="spacer"></span>
+          <button class="btn btn-ghost" type="button" data-dialog-close>Cancel</button>
+          <button class="btn btn-primary" type="submit">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Save Resource
+          </button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <script type="module" src="js/components.js"></script>
+  <script type="module" src="js/admin/admin-resources.js"></script>
+</body>
+</html>

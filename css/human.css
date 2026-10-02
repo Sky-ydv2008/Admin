@@ -1,0 +1,397 @@
+/* ============================================================
+   Apex Innovators — human.css
+   Editorial "made by people" theme, layered over the component
+   system via the design tokens. Paper surfaces, warm ink, one
+   terracotta accent, serif display type, real shadows.
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600&display=swap");
+
+:root {
+  /* Surfaces — warm paper, not navy */
+  --bg-0: #f3f0ea;
+  --bg-1: #faf8f4;
+  --bg-2: #efebe3;
+  --surface: #fffdf9;
+  --surface-2: #f8f5ef;
+  --surface-3: #f1ece3;
+  --elev: #ffffff;
+  --elev-2: #fffdf9;
+
+  /* Text — warm ink */
+  --text: #211c14;
+  --text-2: #5f5749;
+  --text-3: #938a79;
+
+  /* Lines */
+  --border: rgba(66, 55, 34, 0.14);
+  --border-strong: rgba(66, 55, 34, 0.3);
+
+  /* Accents — terracotta, one voice */
+  --acc: #b0471a;
+  --acc-soft: #8f3a12;
+  --vio: #5f6c46;
+  --vio-soft: #7c8a5e;
+  --acc-grad: linear-gradient(120deg, #b0471a 0%, #9a5a12 100%);
+
+  /* Semantic — calmer, light-theme friendly */
+  --ok: #3a7a45;
+  --ok-soft: rgba(58, 122, 69, 0.12);
+  --warn: #9a6a0e;
+  --warn-soft: rgba(154, 106, 14, 0.13);
+  --bad: #b3402f;
+  --bad-soft: rgba(179, 64, 47, 0.12);
+  --info: #28608f;
+  --info-soft: rgba(40, 96, 143, 0.12);
+
+  /* Type */
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, "Times New Roman", serif;
+
+  /* Radii — quieter */
+  --r-sm: 6px;
+  --r: 10px;
+  --r-lg: 14px;
+  --r-xl: 18px;
+
+  /* Elevation — paper shadows */
+  --shadow-sm: 0 1px 2px rgba(74, 60, 30, 0.07);
+  --shadow: 0 12px 28px -18px rgba(74, 60, 30, 0.28);
+  --shadow-lg: 0 30px 60px -32px rgba(74, 60, 30, 0.35);
+
+  --focus-ring: 0 0 0 3px rgba(176, 71, 26, 0.25);
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  color: var(--text);
+  background: var(--bg-0);
+  background-image: none;
+}
+
+::selection {
+  background: rgba(176, 71, 26, 0.18);
+  color: var(--text);
+}
+
+a {
+  color: var(--acc);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--acc-soft);
+}
+
+/* ---------- Type: human scale & serif display ---------- */
+h1, h2, h3, h4, .brand-name, .state-title, .modal-head h2,
+.card-title, .post-title, .detail-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--text);
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--acc);
+}
+
+/* ---------- Hero: flat, no grid/glow ---------- */
+.page-hero {
+  background: var(--bg-1);
+  border-bottom: 1px solid var(--border);
+}
+
+.page-hero::before {
+  content: none;
+}
+
+/* ---------- Header / nav: light bar with an underline active state ---------- */
+
+/* Header: light sticky bar (specificity-safe) */
+.site-header, header {
+  background: var(--bg-1, #faf8f4) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border-bottom: 1px solid rgba(66, 55, 34, 0.1) !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03) !important;
+}
+.site-header .brand-name,
+.site-header .brand { color: #0f172a !important; }
+.site-header .brand-name em { color: #0284c7 !important; font-style: normal; font-weight: 700; }
+
+.anime-nav-pill-container {
+  background: transparent !important;
+  border: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.nav-link, .anime-nav-link {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #334155 !important;
+  border-radius: 6px;
+  padding: 0.45rem 0.75rem;
+}
+
+.nav-link:hover, .anime-nav-link:hover {
+  color: #0284c7 !important;
+  background: rgba(2, 132, 199, 0.08) !important;
+}
+
+.nav-link.active, .anime-nav-link.active {
+  color: #0284c7 !important;
+  font-weight: 700 !important;
+  background: rgba(2, 132, 199, 0.1) !important;
+}
+
+.nav-burger { color: #0f172a !important; }
+.nav-links { background: #ffffff !important; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  font-weight: 600;
+  border-radius: var(--r-sm);
+}
+
+.btn-primary {
+  background: var(--acc);
+  border: 1px solid var(--acc);
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(74, 60, 30, 0.18);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--acc-soft);
+  border-color: var(--acc-soft);
+  color: #fff;
+  filter: none;
+  box-shadow: 0 4px 12px -4px rgba(143, 58, 18, 0.45);
+}
+
+.btn-outline {
+  border: 1px solid var(--border-strong);
+  color: var(--text-2);
+  background: transparent;
+}
+
+.btn-outline:hover:not(:disabled) {
+  border-color: var(--acc);
+  color: var(--acc);
+  background: rgba(176, 71, 26, 0.05);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  color: var(--text);
+  background: rgba(66, 55, 34, 0.07);
+}
+
+/* ---------- Chips ---------- */
+.chip, .chip-filter, .chip-tech {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  font-weight: 500;
+}
+
+.chip-filter:hover {
+  color: var(--text);
+  border-color: var(--border-strong);
+  background: var(--surface-2);
+}
+
+.chip-filter.active {
+  color: #fff;
+  background: var(--acc);
+  border-color: var(--acc);
+}
+
+.chip-featured {
+  color: var(--acc);
+  border-color: rgba(176, 71, 26, 0.4);
+  background: rgba(176, 71, 26, 0.08);
+}
+
+.chip-year {
+  color: var(--vio);
+  border-color: rgba(95, 108, 70, 0.35);
+  background: rgba(95, 108, 70, 0.08);
+}
+
+.tech-chip {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-2);
+}
+
+/* ---------- Cards ---------- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.card-hover:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+/* ---------- Status badges on light paper ---------- */
+.badge {
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+/* ---------- Post like / actions ---------- */
+.post-action.liked {
+  color: var(--bad);
+  border-color: rgba(179, 64, 47, 0.4);
+  background: var(--bad-soft);
+}
+
+.post-action-danger:hover {
+  color: var(--bad);
+  border-color: rgba(179, 64, 47, 0.45);
+  background: var(--bad-soft);
+}
+
+/* ---------- Footer: ink block anchors the page ---------- */
+.site-footer, .cinematic-footer-wrapper {
+  background: #060b14 !important;
+  color: #f8fafc !important;
+  border-top: 1px solid rgba(34, 211, 238, 0.15) !important;
+}
+
+.site-footer h4, .cinematic-footer-wrapper h4,
+.site-footer .footer-brand .brand-name,
+.cinematic-footer-wrapper .brand-name {
+  color: #ffffff !important;
+}
+
+.cinematic-footer-wrapper .brand-name em {
+  color: #b0471a !important;
+  font-style: normal;
+}
+
+.site-footer a, .site-footer .footer-col a,
+.cinematic-footer-wrapper a, .cinematic-footer-wrapper .footer-col a {
+  color: #cbd5e1 !important;
+  font-weight: 500;
+}
+
+.site-footer a:hover, .site-footer .footer-col a:hover,
+.cinematic-footer-wrapper a:hover, .cinematic-footer-wrapper .footer-col a:hover {
+  color: #ffffff !important;
+}
+
+.site-footer .footer-tag,
+.site-footer .footer-bottom,
+.site-footer .footer-bottom a,
+.site-footer .muted {
+  color: #94a3b8 !important;
+}
+
+.footer-institute {
+  background: rgba(148, 163, 184, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #e2e8f0 !important;
+}
+
+.footer-glass-pill {
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.4) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #f8fafc !important;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.15) !important;
+}
+
+.footer-glass-pill span {
+  color: #ffffff !important;
+}
+
+.footer-glass-pill:hover {
+  background: linear-gradient(145deg, rgba(51, 65, 85, 0.7) 0%, rgba(30, 41, 59, 0.5) 100%) !important;
+  border-color: rgba(34, 211, 238, 0.4) !important;
+  color: #ffffff !important;
+}
+
+.animate-footer-scroll-marquee span {
+  color: #cbd5e1 !important;
+}
+
+.footer-giant-bg-text {
+  color: transparent !important;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.12) !important;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.03) 90%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+/* ---------- Demo banner (light-friendly) ---------- */
+#demo-banner {
+  background: #2a241a !important;
+  color: #e8dfce !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+#demo-banner a {
+  color: #e0996b !important;
+}
+
+/* ---------- Admin: same paper language ---------- */
+.admin-sidebar {
+  background: var(--bg-1);
+  border-right: 1px solid var(--border);
+}
+
+.admin-topbar {
+  background: rgba(250, 248, 244, 0.92);
+  border-bottom: 1px solid var(--border);
+}
+
+.admin-body {
+  background: var(--bg-0);
+}
+
+.table {
+  --border: rgba(66, 55, 34, 0.12);
+}
+
+.modal-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+}
+
+.notice {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+
+/* ---------- Status colors re-inked for paper ---------- */
+.b-draft      { color: #6b6252; background: rgba(66, 55, 34, 0.08);  border-color: rgba(66, 55, 34, 0.22); }
+.b-pending    { color: var(--warn); background: var(--warn-soft);    border-color: rgba(154, 106, 14, 0.35); }
+.b-approved   { color: var(--info); background: var(--info-soft);    border-color: rgba(40, 96, 143, 0.35); }
+.b-published  { color: var(--ok);   background: var(--ok-soft);      border-color: rgba(58, 122, 69, 0.35); }
+.b-rejected   { color: var(--bad);  background: var(--bad-soft);     border-color: rgba(179, 64, 47, 0.35); }
+.b-active     { color: var(--ok);   background: var(--ok-soft);      border-color: rgba(58, 122, 69, 0.35); }
+
+.btn-success-soft { color: var(--ok);  border-color: rgba(58, 122, 69, 0.3); }
+.btn-warn-soft    { color: var(--warn); border-color: rgba(154, 106, 14, 0.32); }
+.btn-danger       { color: #fff; background: var(--bad); border-color: var(--bad); }
+
+.tc-cyan    { color: var(--acc); background: rgba(176, 71, 26, 0.08); border-color: rgba(176, 71, 26, 0.28); }
+.tc-violet  { color: var(--vio); background: rgba(95, 108, 70, 0.08); border-color: rgba(95, 108, 70, 0.3); }
+.tc-amber   { color: var(--warn); background: var(--warn-soft); border-color: rgba(154, 106, 14, 0.3); }
+.tc-emerald { color: var(--ok); background: var(--ok-soft); border-color: rgba(58, 122, 69, 0.3); }

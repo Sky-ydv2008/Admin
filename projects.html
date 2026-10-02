@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="index, follow">
+  <meta name="google-site-verification" content="google5c477f08f64f15ea.html" />
+  <meta name="google-site-verification" content="google5c477f08f64f15ea" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects — Apex Innovators Admin</title>
+  <meta name="description" content="Administer Apex Innovators projects: review, approve, publish, edit and delete.">
+  
+  <meta name="theme-color" content="#0a0f1a">
+  <link rel="icon" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%2322d3ee'/%3E%3Cpath d='M13 2 3 14h9l-1 8 10-12h-9l1-8z' fill='%23050a14'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"></noscript>
+  <link rel="preload" href="css/style.css" as="style">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/human.css">
+<script src="js/fast-nav.js" defer></script>
+</head>
+<body class="admin-body">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="admin-layout">
+    <aside class="admin-sidebar" id="admin-sidebar" aria-label="Admin navigation"></aside>
+    <div class="admin-main">
+      <header class="admin-topbar" id="admin-topbar"></header>
+      <main class="admin-content" id="main-content">
+        <div class="admin-stack">
+          <div class="toolbar">
+            <div class="toolbar-left filter-row">
+              <div class="search-wrap">
+                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input class="input" id="filter-q" type="search" placeholder="Search projects…" aria-label="Search projects">
+              </div>
+              <select class="input" id="filter-status" style="width:auto;" aria-label="Filter by status">
+                <option value="">All statuses</option>
+                <option value="DRAFT">Draft</option>
+                <option value="PENDING_REVIEW">Pending review</option>
+                <option value="APPROVED">Approved</option>
+                <option value="PUBLISHED">Published</option>
+                <option value="REJECTED">Rejected</option>
+              </select>
+            </div>
+            <div class="toolbar-right">
+              <button class="btn btn-primary" id="btn-new" type="button">
+                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                New project
+              </button>
+            </div>
+          </div>
+
+          <p class="results-meta" id="list-info" role="status"></p>
+
+          <div class="table-wrap">
+            <div class="table-scroll">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Project</th>
+                    <th scope="col">Year</th>
+                    <th scope="col">Techs</th>
+                    <th scope="col">Featured</th>
+                    <th scope="col">Status</th>
+                    <th scope="col" class="hide-md">Created</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+              </table>
+            </div>
+          </div>
+          <div id="table-pager"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <dialog id="project-modal" class="modal" aria-labelledby="project-modal-title">
+    <div class="modal-box wide">
+      <div class="modal-head">
+        <h2 id="project-modal-title">Project</h2>
+        <button class="modal-close" type="button" data-dialog-close aria-label="Close">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <form id="project-form" class="modal-body form" novalidate onsubmit="return false;">
+        <input type="hidden" id="p-id" value="">
+        <div class="form-grid">
+          <div class="field span-2">
+            <label for="p-title">Title <span class="req">*</span></label>
+            <input class="input" id="p-title" type="text" maxlength="190" placeholder="Project title" required>
+          </div>
+          <div class="field span-2">
+            <label for="p-tagline">Tagline</label>
+            <input class="input" id="p-tagline" type="text" maxlength="300" placeholder="One line that sells the idea">
+          </div>
+          <div class="field">
+            <label for="p-year">Year</label>
+            <input class="input" id="p-year" type="number" min="2000" max="2100" placeholder="e.g. 2026">
+          </div>
+          <div class="field">
+            <label for="p-status">Status</label>
+            <select class="input" id="p-status">
+              <option value="DRAFT">Draft</option>
+              <option value="PENDING_REVIEW">Pending review</option>
+              <option value="APPROVED">Approved</option>
+              <option value="PUBLISHED">Published</option>
+              <option value="REJECTED">Rejected</option>
+            </select>
+          </div>
+          <div class="field span-2">
+            <label for="p-description">Overview</label>
+            <textarea class="input" id="p-description" rows="4" maxlength="10000" placeholder="What the project is and why it exists"></textarea>
+          </div>
+          <div class="field span-2">
+            <label for="p-problem">Problem</label>
+            <textarea class="input" id="p-problem" rows="3" maxlength="10000" placeholder="What problem does it solve?"></textarea>
+          </div>
+          <div class="field span-2">
+            <label for="p-solution">Solution</label>
+            <textarea class="input" id="p-solution" rows="3" maxlength="10000" placeholder="How did the team solve it?"></textarea>
+          </div>
+          <div class="field">
+            <label for="p-github-url">GitHub URL</label>
+            <input class="input" id="p-github-url" type="url" placeholder="https://github.com/…">
+          </div>
+          <div class="field">
+            <label for="p-demo-url">Demo URL</label>
+            <input class="input" id="p-demo-url" type="url" placeholder="https://…">
+          </div>
+          <div class="field span-2">
+            <label for="p-docs-url">Docs URL</label>
+            <input class="input" id="p-docs-url" type="url" placeholder="https://…">
+          </div>
+          <label class="check-row span-2">
+            <input type="checkbox" id="p-featured">
+            <span>Feature this project on the home page</span>
+          </label>
+        </div>
+        <div class="modal-foot" style="padding-inline:0;border-top:none;padding-bottom:0;">
+          <span class="spacer"></span>
+          <button class="btn btn-ghost" type="button" data-dialog-close>Cancel</button>
+          <button class="btn btn-primary" type="submit">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Save project
+          </button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <script type="module" src="js/components.js"></script>
+  <script type="module" src="js/admin/admin-projects.js"></script>
+</body>
+</html>

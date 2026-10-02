@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="index, follow">
+  <meta name="google-site-verification" content="google5c477f08f64f15ea.html" />
+  <meta name="google-site-verification" content="google5c477f08f64f15ea" />
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard — Apex Innovators Admin</title>
+  <meta name="description" content="Apex Innovators admin dashboard — platform overview, moderation queues and recent activity.">
+  
+  <meta name="theme-color" content="#0a0f1a">
+  <link rel="icon" href="favicon.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"></noscript>
+  <link rel="preload" href="css/style.css" as="style">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/human.css">
+<script src="js/fast-nav.js" defer></script>
+</head>
+<body class="admin-body">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="admin-layout">
+    <aside class="admin-sidebar" id="admin-sidebar" aria-label="Admin navigation"></aside>
+    <div class="admin-main">
+      <header class="admin-topbar" id="admin-topbar"></header>
+      <main class="admin-content" id="main-content">
+        <div id="widget-grid" class="widget-grid" aria-live="polite"></div>
+
+        <div class="dash-columns">
+          <section aria-labelledby="activity-heading">
+            <div class="panel-head">
+              <div>
+                <h2 id="activity-heading">Recent activity</h2>
+                <p>Audit trail of recent admin actions and moderation events.</p>
+              </div>
+            </div>
+            <div class="card card-pad" id="activity-list"></div>
+          </section>
+
+          <section aria-labelledby="quick-heading">
+            <div class="panel-head">
+              <div>
+                <h2 id="quick-heading">Quick actions</h2>
+                <p>Jump straight into the queues that need you.</p>
+              </div>
+            </div>
+            <div style="display:grid;gap:0.8rem;">
+              <a class="card card-pad" href="projects.html" style="display:flex;align-items:center;gap:0.9rem;">
+                <span class="icon-tile"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
+                <span><strong>Review projects</strong><br><span class="faint" style="font-size:0.84rem;">Approve and publish submitted builds</span></span>
+              </a>
+              <a class="card card-pad" href="posts.html" style="display:flex;align-items:center;gap:0.9rem;">
+                <span class="icon-tile violet"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+                <span><strong>Moderate posts</strong><br><span class="faint" style="font-size:0.84rem;">Approve community posts and comments</span></span>
+              </a>
+              <a class="card card-pad" href="messages.html" style="display:flex;align-items:center;gap:0.9rem;">
+                <span class="icon-tile amber"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22 6 12 13 2 6"/></svg></span>
+                <span><strong>Read messages</strong><br><span class="faint" style="font-size:0.84rem;">Reply to contact-form submissions</span></span>
+              </a>
+              <a class="card card-pad" href="users.html" style="display:flex;align-items:center;gap:0.9rem;">
+                <span class="icon-tile emerald"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+                <span><strong>Manage users</strong><br><span class="faint" style="font-size:0.84rem;">Roles, status and profiles</span></span>
+              </a>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="js/components.js"></script>
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

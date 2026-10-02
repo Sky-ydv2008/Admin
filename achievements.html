@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="index, follow">
+  <meta name="google-site-verification" content="google5c477f08f64f15ea.html" />
+  <meta name="google-site-verification" content="google5c477f08f64f15ea" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Achievements — Apex Innovators Admin</title>
+  <meta name="description" content="Manage the Apex Innovators achievements timeline: add, edit and remove awards and certificates.">
+  
+  <meta name="theme-color" content="#0a0f1a">
+  <link rel="icon" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%2322d3ee'/%3E%3Cpath d='M13 2 3 14h9l-1 8 10-12h-9l1-8z' fill='%23050a14'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"></noscript>
+  <link rel="preload" href="css/style.css" as="style">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/human.css">
+<script src="js/fast-nav.js" defer></script>
+</head>
+<body class="admin-body">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="admin-layout">
+    <aside class="admin-sidebar" id="admin-sidebar" aria-label="Admin navigation"></aside>
+    <div class="admin-main">
+      <header class="admin-topbar" id="admin-topbar"></header>
+      <main class="admin-content" id="main-content">
+        <div class="admin-stack">
+          <div class="toolbar">
+            <div class="toolbar-left">
+              <p class="muted" style="font-size:0.9rem;">Awards and certificates shown on the public timeline.</p>
+            </div>
+            <div class="toolbar-right">
+              <button class="btn btn-primary" id="btn-new" type="button">
+                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                New achievement
+              </button>
+            </div>
+          </div>
+
+          <p class="results-meta" id="list-info" role="status"></p>
+
+          <div class="table-wrap">
+            <div class="table-scroll">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Achievement</th>
+                    <th scope="col">Member</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Date</th>
+                    <th scope="col" class="hide-md">Verify</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+              </table>
+            </div>
+          </div>
+          <div id="table-pager"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <dialog id="achievement-modal" class="modal" aria-labelledby="achievement-modal-title">
+    <div class="modal-box wide">
+      <div class="modal-head">
+        <h2 id="achievement-modal-title">Achievement</h2>
+        <button class="modal-close" type="button" data-dialog-close aria-label="Close">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <form id="achievement-form" class="modal-body form" novalidate>
+        <input type="hidden" id="a-id" value="">
+        <div class="form-grid">
+          <div class="field span-2">
+            <label for="a-user-id">Member <span class="req">*</span></label>
+            <select class="input" id="a-user-id" required>
+              <option value="">Loading members…</option>
+            </select>
+          </div>
+          <div class="field span-2">
+            <label for="a-title">Title <span class="req">*</span></label>
+            <input class="input" id="a-title" type="text" maxlength="190" placeholder="e.g. Winner — Smart India Hackathon 2026" required>
+          </div>
+          <div class="field">
+            <label for="a-type">Type</label>
+            <select class="input" id="a-type">
+              <option value="AWARD">Award</option>
+              <option value="FINALIST">Finalist</option>
+              <option value="CERTIFICATE">Certificate</option>
+              <option value="MENTION">Mention</option>
+              <option value="OTHER">Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="a-date">Award date</label>
+            <input class="input" id="a-date" type="date">
+          </div>
+          <div class="field span-2">
+            <label for="a-issuer">Issuer</label>
+            <input class="input" id="a-issuer" type="text" maxlength="190" placeholder="Who issued the award / certificate">
+          </div>
+          <div class="field span-2">
+            <label for="a-verify-url">Verify URL</label>
+            <input class="input" id="a-verify-url" type="url" placeholder="https://link-to-proof…">
+          </div>
+          <div class="field span-2">
+            <label for="a-description">Description</label>
+            <textarea class="input" id="a-description" rows="3" maxlength="5000" placeholder="Short context about the achievement"></textarea>
+          </div>
+        </div>
+        <div class="modal-foot" style="padding-inline:0;border-top:none;padding-bottom:0;">
+          <span class="spacer"></span>
+          <button class="btn btn-ghost" type="button" data-dialog-close>Cancel</button>
+          <button class="btn btn-primary" type="submit">Save achievement</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <script type="module" src="js/components.js"></script>
+  <script type="module" src="js/admin/admin-achievements.js"></script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="index, follow">
+  <meta name="google-site-verification" content="google5c477f08f64f15ea.html" />
+  <meta name="google-site-verification" content="google5c477f08f64f15ea" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Users — Apex Innovators Admin</title>
+  <meta name="description" content="Manage Apex Innovators users: search accounts, view profiles, update roles and status.">
+  
+  <meta name="theme-color" content="#0a0f1a">
+  <link rel="icon" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%2322d3ee'/%3E%3Cpath d='M13 2 3 14h9l-1 8 10-12h-9l1-8z' fill='%23050a14'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"></noscript>
+  <link rel="preload" href="css/style.css" as="style">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/human.css">
+<script src="js/fast-nav.js" defer></script>
+</head>
+<body class="admin-body">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="admin-layout">
+    <aside class="admin-sidebar" id="admin-sidebar" aria-label="Admin navigation"></aside>
+    <div class="admin-main">
+      <header class="admin-topbar" id="admin-topbar"></header>
+      <main class="admin-content" id="main-content">
+        <div class="admin-stack">
+          <div class="toolbar">
+            <div class="toolbar-left filter-row">
+              <div class="search-wrap">
+                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input class="input" id="filter-q" type="search" placeholder="Search by name or email…" aria-label="Search users">
+              </div>
+            </div>
+            <div class="toolbar-right">
+              <button class="btn btn-primary btn-sm" type="button" id="btn-new-user">New member</button>
+              <span class="badge b-member">Roles: ADMIN · CORE_MEMBER · MEMBER</span>
+            </div>
+          </div>
+
+          <p class="results-meta" id="list-info" role="status"></p>
+
+          <div class="table-wrap">
+            <div class="table-scroll">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">User</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Status</th>
+                    <th scope="col" class="hide-md">ID</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+              </table>
+            </div>
+          </div>
+          <div id="table-pager"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <dialog id="user-view-modal" class="modal" aria-labelledby="user-view-title">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h2 id="user-view-title">User profile</h2>
+        <button class="modal-close" type="button" data-dialog-close aria-label="Close">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body" id="user-view-body"></div>
+      <div class="modal-foot">
+        <button class="btn btn-ghost" type="button" data-dialog-close>Close</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="user-create-modal" class="modal" aria-labelledby="user-create-title">
+    <div class="modal-box" style="max-width:560px;">
+      <div class="modal-head">
+        <h2 id="user-create-title">Add team member</h2>
+        <button class="modal-close" type="button" data-dialog-close aria-label="Close">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <form id="user-create-form" class="modal-body form" novalidate>
+        <div class="form-grid">
+          <div class="field">
+            <label for="nu-name">Full name *</label>
+            <input class="input" id="nu-name" name="name" required maxlength="120" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="nu-email">Email *</label>
+            <input class="input" id="nu-email" name="email" type="email" required maxlength="190" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="nu-password">Temporary password *</label>
+            <input class="input" id="nu-password" name="password" type="password" required minlength="8" maxlength="72" autocomplete="new-password">
+            <p class="hint">Minimum 8 characters. They can later be changed by any admin via the Edit button on this page.</p>
+          </div>
+          <div class="field">
+            <label for="nu-role">Role</label>
+            <select class="input" id="nu-role" name="role">
+              <option value="MEMBER">Member</option>
+              <option value="CORE_MEMBER">Core member</option>
+              <option value="ADMIN">Admin</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="nu-headline">Headline</label>
+          <input class="input" id="nu-headline" name="headline" maxlength="190" placeholder="e.g. Backend Developer · Spring Boot">
+        </div>
+        <div class="field">
+          <label for="nu-bio">Bio</label>
+          <textarea class="input" id="nu-bio" name="bio" rows="3" maxlength="5000" placeholder="Short profile shown on the team page"></textarea>
+        </div>
+        <div class="form-grid">
+          <div class="field">
+            <label for="nu-github">GitHub</label>
+            <input class="input" id="nu-github" name="github" maxlength="190" placeholder="username or URL">
+          </div>
+          <div class="field">
+            <label for="nu-linkedin">LinkedIn</label>
+            <input class="input" id="nu-linkedin" name="linkedin" maxlength="190" placeholder="profile URL">
+          </div>
+        </div>
+        <p class="form-error" id="user-create-error" role="alert" hidden></p>
+        <div class="modal-foot" style="padding-inline:0;border-top:none;padding-bottom:0;">
+          <span class="spacer"></span>
+          <button class="btn btn-ghost" type="button" data-dialog-close>Cancel</button>
+          <button class="btn btn-primary" type="submit">Add member</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog id="user-edit-modal" class="modal" aria-labelledby="user-edit-title">
+    <div class="modal-box" style="max-width:480px;">
+      <div class="modal-head">
+        <h2 id="user-edit-title">Edit user</h2>
+        <button class="modal-close" type="button" data-dialog-close aria-label="Close">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <form id="user-edit-form" class="modal-body form" novalidate>
+        <input type="hidden" id="u-id" value="">
+        <div class="field">
+          <label for="u-name">Name</label>
+          <input class="input" id="u-name" maxlength="120" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="u-email">Login email</label>
+          <input class="input" id="u-email" type="email" maxlength="190" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="u-password">New password</label>
+          <input class="input" id="u-password" type="password" minlength="8" maxlength="72" autocomplete="new-password" placeholder="Leave blank to keep the current password">
+        </div>
+        <div class="form-grid">
+          <div class="field">
+            <label for="u-role">Role</label>
+            <select class="input" id="u-role">
+              <option value="ADMIN">Admin</option>
+              <option value="CORE_MEMBER">Core member</option>
+              <option value="MEMBER">Member</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="u-status">Status</label>
+            <select class="input" id="u-status">
+              <option value="ACTIVE">Active</option>
+              <option value="SUSPENDED">Suspended</option>
+            </select>
+          </div>
+        </div>
+        <p class="hint" style="font-size:0.8rem;color:var(--text-3);">Every saved change (name, email, password, role, status) is recorded in the audit log with your user id. Leave password blank to keep it unchanged.</p>
+        <p class="form-error" id="user-edit-error" role="alert" hidden></p>
+        <div class="modal-foot" style="padding-inline:0;border-top:none;padding-bottom:0;">
+          <span class="spacer"></span>
+          <button class="btn btn-ghost" type="button" data-dialog-close>Cancel</button>
+          <button class="btn btn-primary" type="submit">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <script type="module" src="js/components.js"></script>
+  <script type="module" src="js/admin/admin-users.js"></script>
+</body>
+</html>
