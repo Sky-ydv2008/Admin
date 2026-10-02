@@ -33,8 +33,11 @@ function rowSkeleton() {
 function collectForm() {
   const val = (id) => document.getElementById(id)?.value.trim() ?? "";
   const opt = (v) => (v ? v : null);
+  const techRaw = val("p-technologies");
+  const techList = techRaw ? techRaw.split(",").map(t => ({ name: t.trim() })).filter(t => t.name) : [];
   return {
     title: val("p-title"),
+    slug: opt(val("p-slug")),
     tagline: opt(val("p-tagline")),
     year: val("p-year") ? Number(val("p-year")) : null,
     status: val("p-status"),
@@ -45,6 +48,7 @@ function collectForm() {
     description: opt(val("p-description")),
     problem: opt(val("p-problem")),
     solution: opt(val("p-solution")),
+    technologies: techList,
   };
 }
 
@@ -169,6 +173,8 @@ function openEdit(p) {
   const pGithub = document.getElementById("p-github-url"); if (pGithub) pGithub.value = p.githubUrl || "";
   const pDemo = document.getElementById("p-demo-url"); if (pDemo) pDemo.value = p.demoUrl || "";
   const pDocs = document.getElementById("p-docs-url"); if (pDocs) pDocs.value = p.docsUrl || "";
+  const pSlug = document.getElementById("p-slug"); if (pSlug) pSlug.value = p.slug || "";
+  const pTech = document.getElementById("p-technologies"); if (pTech) pTech.value = Array.isArray(p.technologies) ? p.technologies.map(t => typeof t === "object" ? t.name : t).join(", ") : "";
   const pDesc = document.getElementById("p-description"); if (pDesc) pDesc.value = p.description || "";
   const pProb = document.getElementById("p-problem"); if (pProb) pProb.value = p.problem || "";
   const pSol = document.getElementById("p-solution"); if (pSol) pSol.value = p.solution || "";
