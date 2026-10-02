@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: team-apex-admin-backend
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: npm install && npm run build --if-present
+    startCommand: npm start || node server.js || npx static-server .
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: CORS_ORIGIN
+        value: "*"
